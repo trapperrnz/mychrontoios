@@ -1,26 +1,24 @@
+from typing import Self
 import unittest
 import xrk
 import math
 
 class XrkTest(unittest.TestCase):
-    def setUp(self):
-        self.xrk = xrk.XRK('test.xrk')
+    Self.xrk = xrk.XRK('test.xrk')
 
-    def tearDown(self):
-        self.assertEqual(self.xrk.close(), True)
 
     def testBasics(self):
         # load up the datafile and make sure some stuff exists
         self.assertEqual(self.xrk.championship_name, '')
-        self.assertEqual(self.xrk.track_name, 'Adria Kart')
+        self.assertEqual(self.xrk.track_name, 'RotoruaK')
         self.assertEqual(self.xrk.vehicle_name, '')
-        self.assertEqual(self.xrk.racer_name, 'A.GIARDELLI')
+        self.assertEqual(self.xrk.racer_name, 'S.BRISCOE')
         self.assertEqual(self.xrk.venue_type, '')
-        self.assertEqual(self.xrk.datetime, '2015-12-23 12:09:04')
-        self.assertEqual(self.xrk.lapcount, 11)
+        self.assertEqual(self.xrk.datetime, '2023-05-21 12:09:04')
+        self.assertEqual(self.xrk.lapcount, 17)
 
     def testChannels(self):
-        # OK.... enumerate the channels
+        # OK.... list all channels
         self.assertEqual(len(self.xrk.channels), 33)
 
         foundchanneldata = {}
@@ -90,7 +88,6 @@ class XrkTest(unittest.TestCase):
             start, duration = lap
             samples = self.xrk.channels['AccelerometerX'].samples(lap=i, xtime=True, xabsolute=True)
 
-            # TBH I'm just tweaking rel_tol to pass ... so bleh
             self.assertTrue(math.isclose(samples[0][0], start, rel_tol=0.003))
             self.assertTrue(math.isclose(samples[0][-1] - samples[0][0], duration, rel_tol=0.003))
 
