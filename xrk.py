@@ -257,7 +257,7 @@ class XRK():
         return channels
 
     @functools.cached_property
-    def timedistance(self) -> tuple[list[int], list[int]]:
+    def timedistance(self) -> 'tuple[list[int], list[int]]':
         '''Compute the time distance vector for the entire datafile using GPS
         Speed
 
@@ -314,7 +314,7 @@ class XRK():
         return self._tdlookup(idistance, distances, times)
 
     @functools.cached_property
-    def lap_info(self) -> list[tuple[float, float]]:
+    def lap_info(self) -> 'list[tuple[float, float]]':
         pstart = c_double(0)
         pduration = c_double(0)
 
